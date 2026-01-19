@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jam Digital</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 40px;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            width: 350px;
+        }
+
+        /* Gambar GIF Bergerak */
+        .gif-container img {
+            width: 120px;
+            margin-bottom: 15px;
+        }
+
+        #clock {
+            font-size: 60px;
+            font-weight: 800;
+            margin: 10px 0;
+            text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #date {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+
+        .heart {
+            color: #ff4757;
+            font-size: 30px;
+            margin: 15px 0;
+            animation: beat 0.8s infinite;
+        }
+
+        @keyframes beat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        #quote {
+            font-style: italic;
+            font-size: 16px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Gambar Lucu Bergerak (GIF) -->
+        <div class="gif-container">
+            <img src="tenor.gif">
+        </div>
+        
+        <div id="date">Memuat Hari...</div>
+        <div id="clock">00:00:00</div>
+        
+        <div class="heart">❤</div>
+        
+        <div id="quote">"只要和你在一起，一辈子也不嫌长."</div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').textContent = now.toLocaleDateString('id-ID', options);
+        }
+
+        const quotes = [
+            "只要和你在一起，一辈子也不嫌长.",
+            "和你在一起的每一秒都很珍贵.",
+            "我的爱随着时钟的滴答声而增加.",
+            "当我注视你时，时间仿佛停止了.",
+            "你是我每一分钟都如此美好的理由."	
+        ];
+
+        let index = 0;
+        function changeQuote() {
+            index = (index + 1) % quotes.length;
+            document.getElementById('quote').textContent = `"${quotes[index]}"`;
+        }
+
+        setInterval(updateClock, 1000);
+        setInterval(changeQuote, 6000);
+        updateClock();
+    </script>
+
+</body>
+</html>
